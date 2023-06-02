@@ -1,6 +1,9 @@
-import { Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Hub } from "./Hub";
-import { Server } from "./Server";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+export enum ConnectionType {
+    Hub = "hub",
+    Device = "device",
+}
 
 @Entity()
 export class Connection {
@@ -8,9 +11,15 @@ export class Connection {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Server, server => server.connections)
-    server: Server;
+    @Column()
+    vendorId: number;
 
-    @OneToMany(() => Hub, hub => hub.connection)
-    hubs: Hub[];
+    @Column()
+    productId: number;
+
+    @Column()
+    type: ConnectionType;
+
+    @Column()
+    descriptor: string;
 }

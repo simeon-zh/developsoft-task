@@ -1,19 +1,20 @@
-import { DataSource } from "typeorm"
+import { DataSourceOptions } from "typeorm"
 import { Device } from "./entity/Device"
 import { Hub } from "./entity/Hub"
-import { Server } from "./entity/Server"
+import { Connection } from "./entity/Connection"
+import { SeederOptions } from "typeorm-extension"
 
-export const PostgresDataSource = new DataSource({
-    type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: process.env.POSTGRES_DB_USER,
-    password: process.env.POSTGRES_DB_PASSWORD,
-    database: process.env.POSTGRES_DB,
+export const options: DataSourceOptions & SeederOptions = {
+    type: 'postgres',
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT) || 5432,
+    database: process.env.DB_DATABASE || 'temporal',
+    username: process.env.DB_USERNAME || 'admin',
+    password: process.env.DB_PASSWORD || 'secretpassword',
     entities: [
-        Device,
-        Hub,
-        Server,
+        Connection, Hub, Device
     ],
-})
+    seeds: ['src/database/seeds/**/*{.ts,.js}'],
+    factories: ['src/database/factories/**/*{.ts,.js}']
+};
 

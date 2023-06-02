@@ -1,16 +1,15 @@
-import { Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, OneToMany } from "typeorm";
 
 import { Connection } from "./Connection";
 import { Device } from "./Device";
 
 @Entity()
-export class Hub {
-    @PrimaryGeneratedColumn()
-    id: number;
-
-    @ManyToOne(() => Connection, connection => connection.hubs)
-    connection: Connection;
+export class Hub extends Connection {
+    constructor() {
+        super();
+    }
 
     @OneToMany(() => Device, device => device.hub)
-    devices: Device[];
+    devices?: Device[];
+
 }
