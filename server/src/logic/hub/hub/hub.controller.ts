@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Req, Request } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { Hub } from 'src/entity/Hub';
 import { HubService } from './hub.service';
 
@@ -16,4 +16,13 @@ export class HubController {
         return this.hubService.findOneById(id);
     }
 
+    @Post('/remove')
+    removeDeviceFromHub(@Body() body: { hubId: number, deviceId: number }): Promise<Hub> {
+        return this.hubService.removeDeviceFromHub(body.hubId, body.deviceId);
+    }
+
+    @Post('/attach')
+    attachDeviceToHub(@Body() body: { hubId: number, deviceId: number }): Promise<Hub> {
+        return this.hubService.connectDeviceToHub(body.hubId, body.deviceId);
+    }
 }
