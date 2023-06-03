@@ -25,6 +25,7 @@ export default function HubsPage() {
   };
   useEffect(() => {
     getHubs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return (

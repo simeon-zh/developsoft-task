@@ -1,14 +1,14 @@
 import { Device } from "../../../models/models";
 import { CheckIcon } from "@heroicons/react/20/solid";
-export interface DevicesGridProps {
+export interface DevicesForHubProps {
   devices: Device[];
   onSelectDeviceToRemove: (deviceId: number) => void;
 }
 
-export default function DevicesGrid({
+export default function DevicesForHub({
   devices,
   onSelectDeviceToRemove,
-}: DevicesGridProps) {
+}: DevicesForHubProps) {
   return (
     <div className="flow-root">
       <ul className="-mb-8">

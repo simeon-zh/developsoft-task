@@ -25,6 +25,14 @@ const hubsService = {
             deviceId,
         });
         return res.data;
+    },
+
+    async connectDeviceToHub(hubId: number, deviceId: number): Promise<Hub> {
+        const res = await requestService.post('hub/attach-device', {
+            hubId,
+            deviceId,
+        });
+        return res.data;
     }
 }
 

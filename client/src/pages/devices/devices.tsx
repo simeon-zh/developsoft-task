@@ -14,7 +14,7 @@ export default function DevicesPage() {
   const getDevices = async () => {
     try {
       const res: { devices: Device[]; totalItems: number } =
-        await devicesService.getAllDevices(page, 10);
+        await devicesService.getPaginatedDevices(page, 10);
       setDevices(res.devices);
       setTotalPages(Math.ceil(res.totalItems / 10));
     } catch (e: any) {
@@ -25,6 +25,7 @@ export default function DevicesPage() {
   };
   useEffect(() => {
     getDevices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
   return (
     <Page title="Devices">
