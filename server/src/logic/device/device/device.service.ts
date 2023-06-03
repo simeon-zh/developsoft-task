@@ -7,15 +7,15 @@ import { Repository } from 'typeorm';
 export class DeviceService {
     constructor(@InjectRepository(Device) private readonly deviceRepository: Repository<Device>) { }
 
-    async findAll(): Promise<Device[]> {
-        return this.deviceRepository.find({
+    async findAll(perPage = 10, page = 1): Promise<{ devices: Device[], totalItems: number }> {
+        const res = await this.deviceRepository.findAndCount({
             relations: ['hub'],
+            take: perPage,
+            skip: (page - 1) * perPage,
         });
-    }
-
-    async findAllWithoutHub(): Promise<Device[]> {
-        return this.deviceRepository.find({
-            relations: ['hub'],
-        }).then(devices => devices.filter(device => !device.hub));
+        return {
+            devices: res[0],
+            totalItems: res[1],
+        }
     }
 }

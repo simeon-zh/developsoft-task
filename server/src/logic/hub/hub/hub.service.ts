@@ -10,8 +10,16 @@ export class HubService {
         private readonly hubRepository: Repository<Hub>
     ) { }
 
-    async findAll(): Promise<Hub[]> {
-        return await this.hubRepository.find();
+    async findAll(perPage = 10, page = 1): Promise<{ hubs: Hub[], totalItems: number }> {
+        const hubs = await this.hubRepository.findAndCount({
+            relations: ['devices'],
+            take: perPage,
+            skip: (page - 1) * perPage,
+        });
+        return {
+            hubs: hubs[0],
+            totalItems: hubs[1],
+        }
     }
 
     async findOneById(id: number): Promise<Hub> {

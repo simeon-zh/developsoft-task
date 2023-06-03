@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Query } from '@nestjs/common';
 import { Hub } from 'src/entity/Hub';
 import { HubService } from './hub.service';
 
@@ -6,8 +6,10 @@ import { HubService } from './hub.service';
 export class HubController {
     constructor(private readonly hubService: HubService) { }
     @Get()
-    findAll(): Promise<Hub[]> {
-        return this.hubService.findAll();
+    findAll(@Query() { perPage, page }: { perPage: number, page: number }): Promise<{ hubs: Hub[], totalItems: number }> {
+        if (page < 1) page = 1;
+        if (perPage < 1) perPage = 1;
+        return this.hubService.findAll(perPage, page);
     }
 
 

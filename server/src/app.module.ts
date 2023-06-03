@@ -1,6 +1,4 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
 import { ConfigModule } from '@nestjs/config';
 import { HubModule } from "./logic/hub/hub.module";
 import { DeviceModule } from "./logic/device/device.module";
@@ -17,9 +15,9 @@ import { options } from "./data-source";
     }),
   ),
     HubModule,
-    DeviceModule
+    DeviceModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule { }

@@ -15,6 +15,5 @@ export const options: DataSourceOptions & SeederOptions = {
         Connection, Hub, Device
     ],
     seeds: ['src/database/seeds/**/*{.ts,.js}'],
-    factories: ['src/database/factories/**/*{.ts,.js}']
 };
 
