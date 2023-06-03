@@ -2,12 +2,15 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Hub } from 'src/entity/Hub';
 import { Repository } from 'typeorm';
+import { Device } from 'src/entity/Device';
 
 @Injectable()
 export class HubService {
     constructor(
         @InjectRepository(Hub)
-        private readonly hubRepository: Repository<Hub>
+        private readonly hubRepository: Repository<Hub>,
+        @InjectRepository(Device)
+        private readonly deviceRepository: Repository<Device>,
     ) { }
 
     async findAll(perPage = 10, page = 1): Promise<{ hubs: Hub[], totalItems: number }> {
@@ -67,7 +70,7 @@ export class HubService {
             throw new HttpException(`No hub with id ${hubId} found`, HttpStatus.NOT_FOUND)
         }
 
-        const device = await this.hubRepository.findOne({
+        const device = await this.deviceRepository.findOne({
             where: {
                 id: deviceId,
             },

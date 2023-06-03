@@ -18,4 +18,12 @@ export class DeviceService {
             totalItems: res[1],
         }
     }
+
+    async findAllUnattachedDevices(): Promise<Device[]> {
+        const res = await this.deviceRepository.find({
+            relations: ['hub'],
+        });
+        return res.filter(device => device.hub === null);
+    }
+
 }

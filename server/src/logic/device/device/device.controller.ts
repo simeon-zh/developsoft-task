@@ -11,4 +11,10 @@ export class DeviceController {
         if (perPage < 1) perPage = 1;
         return this.deviceService.findAll(perPage, page);
     }
+
+    @Get('/unattached')
+    getUnattachedDevices(): Promise<Device[]> {
+        return this.deviceService.findAllUnattachedDevices();
+    }
+
 }

@@ -6,7 +6,8 @@ import InitializeDb from "./database/seeds/initializeDb.seeder";
 import { runSeeder } from "typeorm-extension";
 import { Hub } from "./entity/Hub";
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
+
   await app.listen(5001);
 
   //initialize the data source of the database

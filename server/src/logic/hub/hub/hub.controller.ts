@@ -18,12 +18,12 @@ export class HubController {
         return this.hubService.findOneById(id);
     }
 
-    @Post('/remove')
+    @Post('/remove-device')
     removeDeviceFromHub(@Body() body: { hubId: number, deviceId: number }): Promise<Hub> {
         return this.hubService.removeDeviceFromHub(body.hubId, body.deviceId);
     }
 
-    @Post('/attach')
+    @Post('/attach-device')
     attachDeviceToHub(@Body() body: { hubId: number, deviceId: number }): Promise<Hub> {
         return this.hubService.connectDeviceToHub(body.hubId, body.deviceId);
     }
