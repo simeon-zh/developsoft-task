@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 interface PaginationProps {
   page: number;
   paginationTabs: number;
-  setPage: any;
+  setPage: (newPage: number) => void;
 }
 export default function Pagination({
   page,

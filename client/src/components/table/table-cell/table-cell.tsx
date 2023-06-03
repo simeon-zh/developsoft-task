@@ -1,5 +1,5 @@
 export interface TableCellProps {
-  children: JSX.Element[] | string | null;
+  children: JSX.Element[] | JSX.Element | string | number | null;
 }
 
 export default function TableCell({ children }: TableCellProps) {

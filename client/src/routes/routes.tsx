@@ -3,8 +3,8 @@ import { Suspense, lazy } from "react";
 import ScrollToTop from "../components/scroll-to-top/scroll-to-top";
 import { RouteTypes } from "./route-types";
 import LoadingSuspense from "../components/loading-suspense/loading-suspense";
-import HubsPage from "../pages/hubs";
-const DevicesPage = lazy(() => import("../pages/devices"));
+import HubsPage from "../pages/hubs/hubs";
+const DevicesPage = lazy(() => import("../pages/devices/devices"));
 
 const AppRoutes = () => {
   return (
