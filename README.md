@@ -18,7 +18,7 @@
 
 ### 3. Open a terminal in the server folder and use docker-compose to pull the image of Postgres and create the database "`docker-compose up -d`"
 
-### 4. While your terminal is in the server directory, install the backend's dependencies and launch the project : `npm i` followed by `npm run start:dev`. You should see the server establishing a connection to the database and running an initial seed.
+### 4. While your terminal is in the server directory, install the backend's dependencies and launch the project : `npm i` followed by `npm run start:dev` (make sure to see "`database system is ready to accept connections`" in the database's logs). You should see the server establishing a connection to the database and running an initial seed.
 
 ### 5. Open a new terminal in the client's directory, install the dependencies and launch the project : `npm i` followed by `npm start`
 
