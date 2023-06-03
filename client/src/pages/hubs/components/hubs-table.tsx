@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Table from "../../../components/table/table";
 import TableCell from "../../../components/table/table-cell/table-cell";
 import { Hub } from "../../../models/models";
@@ -13,6 +14,12 @@ export default function HubsTable({ hubs }: HubsTableProps) {
     "",
   ];
 
+  const navigate = useNavigate();
+
+  const goToSingleHubPage = (hubId: number) => {
+    navigate(`/hubs/${hubId}`);
+  };
+
   return (
     <Table hasContent={Boolean(hubs.length)} headers={headers}>
       {hubs.map((h) => (
@@ -23,7 +30,9 @@ export default function HubsTable({ hubs }: HubsTableProps) {
           <TableCell>{h.devices.length}</TableCell>
 
           <TableCell>
-            <button>View Device Tree</button>
+            <button type="button" onClick={() => goToSingleHubPage(h.id)}>
+              View Device Tree
+            </button>
           </TableCell>
         </tr>
       ))}

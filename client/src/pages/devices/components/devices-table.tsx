@@ -10,7 +10,6 @@ export default function DevicesTable({ devices }: DevicesTableProps) {
     "Vendor ID",
     "Description",
     "Connection Status",
-    "",
   ];
   const isDeviceConnected = (device: Device) => {
     return device.hub !== null;
@@ -50,16 +49,6 @@ export default function DevicesTable({ devices }: DevicesTableProps) {
               )}
             </span>
           </TableCell>
-
-          {isDeviceConnected(d) ? (
-            <TableCell>
-              <button>Disconnect</button>
-            </TableCell>
-          ) : (
-            <TableCell>
-              <button>Connect</button>
-            </TableCell>
-          )}
         </tr>
       ))}
     </Table>

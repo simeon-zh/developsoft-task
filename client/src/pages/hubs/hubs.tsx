@@ -6,25 +6,31 @@ import Pagination from "../../components/pagination/pagination";
 import HubsTable from "./components/hubs-table";
 import { Hub } from "../../models/models";
 import hubsService from "../../service/hubs.service";
-
+import toast from "react-hot-toast";
 export default function HubsPage() {
   const [hubs, setHubs] = useState<Hub[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [page, setPage] = useState<number>(0);
-  const getDevices = async () => {
-    const res: { hubs: Hub[]; totalItems: number } =
-      await hubsService.getAllHubs(page, 10);
-    setHubs(res.hubs);
-    setTotalPages(Math.ceil(res.totalItems / 10));
+  const getHubs = async () => {
+    try {
+      const res: { hubs: Hub[]; totalItems: number } =
+        await hubsService.getAllHubs(page, 10);
+      setHubs(res.hubs);
+      setTotalPages(Math.ceil(res.totalItems / 10));
+    } catch (e: any) {
+      toast.error(
+        "Something went wrong while fetching the Hubs. Please try again later."
+      );
+    }
   };
   useEffect(() => {
-    getDevices();
+    getHubs();
   }, [page]);
 
   return (
     <Page title="Hubs">
       <SidebarLayout>
-        <>
+        <div className="max-w-7xl mx-auto">
           <h1 className="text-2xl font-semibold px-8 md:mt-12">
             Connected Hubs:
           </h1>
@@ -38,7 +44,7 @@ export default function HubsPage() {
             </div>
           )}
           <HubsTable hubs={hubs} />
-        </>
+        </div>
       </SidebarLayout>
     </Page>
   );
